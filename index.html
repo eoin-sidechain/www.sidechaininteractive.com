@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidechain Interactive | Creative Tech & Applied AI</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuration -->
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['"Bebas Neue"', 'cursive'],
+              sans: ['Inter', 'sans-serif'],
+              serif: ['"IBM Plex Serif"', 'serif'],
+            },
+            colors: {
+              brand: {
+                white: '#ffffff',
+                alabaster: '#d9d9d9',
+                graphite: '#353535',
+                teal: '#3c6e71',
+                yale: '#284b63',
+              }
+            },
+            animation: {
+              'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #353535;
+      }
+      .dark {
+        --bg-color: #353535;
+        --text-color: #ffffff;
+      }
+      
+      html { scroll-behavior: smooth; }
+      
+      /* Film Grain Texture */
+      .noise-bg {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        pointer-events: none; z-index: 50; opacity: 0.04;
+        background-size: 100px 100px;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+      .dark .noise-bg { opacity: 0.03; }
+
+      /* Utility for hiding scrollbar but allowing scroll */
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+</head>
+
+<body class="relative min-h-screen w-full bg-brand-white dark:bg-brand-graphite text-brand-graphite dark:text-brand-white transition-colors duration-500 selection:bg-brand-yale selection:text-white dark:selection:bg-brand-teal dark:selection:text-brand-white bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-alabaster/30 via-brand-white to-brand-white dark:from-brand-yale/10 dark:via-brand-graphite dark:to-brand-graphite">
+
+    <!-- Noise Overlay -->
+    <div class="noise-bg mix-blend-multiply dark:mix-blend-overlay"></div>
+
+    <!-- NAVBAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 py-8 px-6 md:px-12 pointer-events-none">
+        <div class="max-w-screen-2xl mx-auto flex justify-between items-center pointer-events-auto">
+            <!-- Logo -->
+            <div class="flex items-center gap-3 group cursor-pointer select-none">
+                <div class="w-10 h-10 relative">
+                    <img src="sidechainlogo.svg" alt="Sidechain Interactive logo" class="w-full h-full">
+                </div>
+                <div class="flex flex-col leading-none justify-center h-full pt-1">
+                    <span class="font-display text-3xl tracking-wide text-brand-graphite dark:text-brand-white transition-colors duration-500 uppercase leading-[0.85]">Sidechain</span>
+                    <span class="font-display text-sm tracking-[0.2em] text-brand-yale dark:text-brand-teal transition-colors duration-500 uppercase leading-none ml-[2px]">Interactive</span>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="p-2 rounded-full text-brand-graphite/50 dark:text-brand-white/50 hover:bg-brand-alabaster hover:text-brand-graphite dark:hover:bg-brand-white/10 dark:hover:text-brand-white transition-colors" aria-label="Toggle theme">
+                    <!-- Sun Icon (Show in Dark Mode) -->
+                    <svg id="icon-sun" class="hidden w-5 h-5 text-brand-teal" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41-1.41"/><path d="m19.07 4.93-1.41-1.41"/></svg>
+                    <!-- Moon Icon (Show in Light Mode) -->
+                    <svg id="icon-moon" class="block w-5 h-5 text-brand-yale" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                </button>
+                <a href="mailto:hello@sidechaininteractive.com" class="hidden md:flex items-center gap-2 px-5 py-2 rounded-full border border-brand-graphite/20 dark:border-brand-white/20 text-brand-graphite dark:text-brand-white font-sans text-xs uppercase tracking-widest hover:bg-brand-graphite hover:text-white dark:hover:bg-brand-white dark:hover:text-brand-graphite transition-all">
+                    Start Project
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="w-full">
+        
+        <!-- HERO SECTION -->
+        <section class="min-h-screen flex flex-col justify-center items-center px-6 md:px-12 relative pt-20 pb-20">
+            <!-- Ambient Background Elements -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-alabaster/40 dark:bg-brand-yale/10 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-brand-yale/5 dark:bg-brand-teal/5 rounded-full blur-[100px] -z-10 animate-pulse-slow" style="animation-delay: 2s"></div>
+
+            <div class="max-w-5xl mx-auto text-center z-10">
+                 <!-- Status Pill -->
+                <div class="inline-flex items-center gap-2 px-3 py-1 mb-8 rounded-full border border-brand-graphite/10 dark:border-brand-white/10 bg-brand-white/50 dark:bg-brand-white/5 backdrop-blur-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-yale dark:bg-brand-teal animate-pulse"></span>
+                    <span class="text-[10px] font-sans uppercase tracking-widest opacity-60">Accepting New Projects</span>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tight mb-8 font-sans font-bold text-brand-graphite dark:text-brand-white">
+                    <span class="font-serif italic font-light block mb-2 opacity-90">Product thinking</span>
+                    <span class="text-brand-yale dark:text-brand-teal">AND APPLIED AI</span>
+                </h1>
+                
+                <p class="text-lg md:text-2xl font-serif font-light text-brand-graphite/80 dark:text-brand-white/80 max-w-2xl mx-auto leading-relaxed mb-12">
+                   Turn AI pressure into shipped products and a strategy you can defend. <br class="hidden md:block"/>
+                   Embedded advisory and development for companies navigating technical complexity.
+                </p>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <a href="mailto:hello@sidechaininteractive.com" class="group flex items-center gap-3 px-8 py-4 bg-brand-graphite dark:bg-brand-white text-white dark:text-brand-graphite rounded-sm hover:bg-brand-yale dark:hover:bg-brand-alabaster transition-all duration-300">
+                        <span class="font-sans text-sm uppercase tracking-widest font-semibold">Get In Touch</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="group flex items-center gap-3 px-8 py-4 border border-brand-graphite/20 dark:border-brand-white/20 hover:border-brand-yale dark:hover:border-brand-teal rounded-sm transition-all duration-300">
+                        <span class="font-sans text-sm uppercase tracking-widest font-semibold">Connect on LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-8 left-0 right-0 text-center opacity-30">
+                <p class="font-mono text-xs uppercase tracking-widest">SCROLL TO EXPLORE</p>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section class="py-24 px-6 md:px-12 bg-brand-white dark:bg-brand-graphite relative z-20">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="border-t border-brand-graphite/10 dark:border-brand-white/10 pt-8 mb-16">
+                    <h2 class="font-sans font-bold text-sm uppercase tracking-widest text-brand-yale dark:text-brand-teal">What We Do</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24">
+                    <!-- Service 1 -->
+                    <div class="group">
+                        <div class="w-full h-px bg-brand-graphite/20 dark:bg-brand-white/20 mb-6 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left"></div>
+                        <h3 class="text-3xl font-sans font-bold mb-4 text-brand-graphite dark:text-brand-white">Ship products, <br/><span class="font-serif italic font-light text-brand-yale dark:text-brand-teal">not decks.</span></h3>
+                        <p class="font-serif text-brand-graphite/70 dark:text-brand-white/70 leading-relaxed">
+                            End-to-end design and development for companies that need to move from idea to market. Building alongside your team, not above them.
+                        </p>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="group">
+                        <div class="w-full h-px bg-brand-graphite/20 dark:bg-brand-white/20 mb-6 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left delay-100"></div>
+                        <h3 class="text-3xl font-sans font-bold mb-4 text-brand-graphite dark:text-brand-white">Embedded <br/><span class="font-serif italic font-light text-brand-yale dark:text-brand-teal">AI Leadership.</span></h3>
+                        <p class="font-serif text-brand-graphite/70 dark:text-brand-white/70 leading-relaxed">
+                            Fractional CTO and AI advisory for companies that need senior technical thinking without the overhead. Clear recommendations, hands-on execution, and a strategy you can actually implement.
+                        </p>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="group">
+                        <div class="w-full h-px bg-brand-graphite/20 dark:bg-brand-white/20 mb-6 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left delay-200"></div>
+                        <h3 class="text-3xl font-sans font-bold mb-4 text-brand-graphite dark:text-brand-white">Prototype <br/><span class="font-serif italic font-light text-brand-yale dark:text-brand-teal">what's next.</span></h3>
+                        <p class="font-serif text-brand-graphite/70 dark:text-brand-white/70 leading-relaxed">
+                            Exploring what becomes possible when AI is foundational, not bolted on. For companies ready to experiment with the edges of what's emerging.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="py-24 px-6 md:px-12 bg-brand-alabaster/20 dark:bg-brand-white/5 border-y border-brand-graphite/5 dark:border-brand-white/5">
+             <div class="max-w-screen-2xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-32">
+                <div class="lg:w-1/3">
+                    <div class="border-t border-brand-graphite/20 dark:border-brand-white/20 pt-4 inline-block pr-12">
+                         <h2 class="font-sans font-bold text-sm uppercase tracking-widest text-brand-yale dark:text-brand-teal mb-2">Why Sidechain</h2>
+                    </div>
+                </div>
+                
+                <div class="lg:w-2/3">
+                    <p class="text-2xl md:text-4xl font-serif font-light leading-tight mb-12 text-brand-graphite dark:text-brand-white">
+                        15 years across music tech <span class="text-brand-graphite/40 dark:text-brand-white/40">(We Are Hunted, Hydric)</span>, entertainment, and product strategy. 3 years leading AI product development at Replica Studios. One exit.
+                    </p>
+                    
+                    <div class="max-w-xl">
+                        <p class="text-lg font-sans text-brand-graphite/70 dark:text-brand-white/70 leading-relaxed">
+                            Experience being the person in the room figuring out what to build and how to ship it — now applied to helping others do the same. Less noise, more clarity, something real at the end.
+                        </p>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+        <!-- RESEARCH SECTION -->
+        <section class="py-24 px-6 md:px-12">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="border-t border-brand-graphite/10 dark:border-brand-white/10 pt-8 mb-12 flex flex-col md:flex-row md:items-start justify-between gap-8">
+                    <h2 class="font-sans font-bold text-sm uppercase tracking-widest text-brand-yale dark:text-brand-teal">Research & Insights</h2>
+                    
+                    <div class="max-w-2xl">
+                         <h3 class="text-xl md:text-2xl font-serif font-light mb-6 text-brand-graphite dark:text-brand-white">
+                            Ongoing research into how AI is reshaping job requirements and workforce composition across Australian industries. Findings and analysis published on LinkedIn.
+                        </h3>
+                        <a href="https://linkedin.com" target="_blank" class="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-widest text-brand-yale dark:text-brand-teal hover:text-brand-graphite dark:hover:text-brand-white transition-colors">
+                            View Research <span class="text-lg leading-none">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-24 px-6 md:px-12 bg-brand-graphite text-brand-white dark:bg-black relative overflow-hidden">
+             <!-- Background Glow -->
+             <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-yale/20 rounded-full blur-[150px] pointer-events-none"></div>
+
+             <div class="max-w-5xl mx-auto text-center relative z-10">
+                <h2 class="text-4xl md:text-6xl font-serif font-light mb-12">
+                    Considering a project? <br/>
+                    <span class="font-serif italic text-brand-alabaster/60">Let's talk.</span>
+                </h2>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <a href="mailto:hello@sidechaininteractive.com" class="px-8 py-4 bg-brand-white text-brand-graphite rounded-sm hover:bg-brand-alabaster transition-colors">
+                        <span class="font-sans text-sm uppercase tracking-widest font-bold">Get In Touch</span>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="px-8 py-4 border border-white/20 rounded-sm hover:border-white hover:bg-white/5 transition-all">
+                        <span class="font-sans text-sm uppercase tracking-widest font-bold">Connect on LinkedIn</span>
+                    </a>
+                </div>
+
+                <div class="mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-sans uppercase tracking-widest text-white/40">
+                    <span>&copy; 2025 Sidechain Interactive</span>
+                    <span>Brisbane, Australia</span>
+                </div>
+             </div>
+        </footer>
+
+    </main>
+
+    <!-- Theme Logic -->
+    <script>
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const sunIcon = document.getElementById('icon-sun');
+      const moonIcon = document.getElementById('icon-moon');
+      const htmlEl = document.documentElement;
+
+      // Check Local Storage or System Preference
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlEl.classList.add('dark');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        htmlEl.classList.remove('dark');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+
+      // Toggle Theme
+      themeToggleBtn.addEventListener('click', () => {
+        if (htmlEl.classList.contains('dark')) {
+          htmlEl.classList.remove('dark');
+          localStorage.theme = 'light';
+          sunIcon.classList.add('hidden');
+          moonIcon.classList.remove('hidden');
+        } else {
+          htmlEl.classList.add('dark');
+          localStorage.theme = 'dark';
+          sunIcon.classList.remove('hidden');
+          moonIcon.classList.add('hidden');
+        }
+      });
+    </script>
+</body>
+</html>

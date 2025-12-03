@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #333333;
+    color: #eeeeee;
+    font-family: 'Bebas Neue', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+#rive-canvas {
+    width: 20vw;
+    height: 20vw;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.sidechain {
+    font-size: 84px;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.interactive {
+    font-size: 32px;
+    letter-spacing: 1px;
+    line-height: 1;
+    margin-top: 4px;
+}
+
+.email {
+    margin-top: 40px;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.email a {
+    color: #eeeeee;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.email a:hover {
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    #rive-canvas {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .sidechain {
+        font-size: 72px;
+    }
+    
+    .interactive {
+        font-size: 28px;
+    }
+    
+    .email {
+        font-size: 16px;
+    }
+}
