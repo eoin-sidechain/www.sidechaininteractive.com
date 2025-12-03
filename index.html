@@ -93,6 +93,21 @@
       .delay-400 { animation-delay: 400ms; }
       .delay-500 { animation-delay: 500ms; }
       .delay-600 { animation-delay: 600ms; }
+
+      /* Tooltip trigger cursor */
+      .tooltip-trigger {
+        cursor: pointer;
+      }
+
+      /* Tooltip animation */
+      .tooltip.is-visible {
+        display: block;
+        animation: tooltipIn 0.2s ease-out forwards;
+      }
+      @keyframes tooltipIn {
+        from { opacity: 0; transform: translateX(100%) translateY(4px) scale(0.96); }
+        to { opacity: 1; transform: translateX(100%) translateY(0) scale(1); }
+      }
     </style>
 <script type="importmap">
 {
@@ -160,14 +175,30 @@
                     <span class="text-[11px] font-sans font-medium uppercase tracking-widest opacity-80">Limited Availability</span>
                 </div>
 
-                <h1 class="animate-fade-in-up delay-100 mb-10 text-brand-graphite dark:text-brand-white flex flex-col items-center">
-                    <span class="font-serif italic font-light text-5xl md:text-7xl lg:text-8xl">Creative Technology</span>
-                    <span class="font-sans font-light text-2xl md:text-3xl text-brand-yale dark:text-brand-teal my-2 md:my-3">×</span>
-                    <span class="font-sans font-semibold text-5xl md:text-7xl lg:text-8xl">Applied AI</span>
+                <h1 id="hero-headline" class="animate-fade-in-up delay-100 mb-10 text-brand-graphite dark:text-brand-white flex flex-col items-center">
+                    <span class="tooltip-trigger relative" data-tooltip="Building software that feels like craft.">
+                        <span class="font-serif italic font-light text-5xl md:text-7xl lg:text-8xl">Creative Technology</span>
+                        <span class="tooltip absolute right-0 -top-2 translate-x-full ml-3 hidden pointer-events-none">
+                            <span class="block px-4 py-3 bg-brand-graphite dark:bg-brand-white text-brand-white dark:text-brand-graphite text-xs font-sans font-medium not-italic tracking-wide whitespace-nowrap rounded-sm shadow-xl border-l-2 border-brand-yale dark:border-brand-teal">
+                                Building software that feels like craft.
+                            </span>
+                        </span>
+                    </span>
+                    <span class="my-2 md:my-3">
+                        <span class="font-sans font-light text-2xl md:text-3xl text-brand-yale dark:text-brand-teal">×</span>
+                    </span>
+                    <span class="tooltip-trigger relative" data-tooltip="AI that ships, not slides.">
+                        <span class="font-sans font-semibold text-5xl md:text-7xl lg:text-8xl">Applied AI</span>
+                        <span class="tooltip absolute right-0 -top-2 translate-x-full ml-3 hidden pointer-events-none">
+                            <span class="block px-4 py-3 bg-brand-graphite dark:bg-brand-white text-brand-white dark:text-brand-graphite text-xs font-sans font-medium tracking-wide whitespace-nowrap rounded-sm shadow-xl border-l-2 border-brand-yale dark:border-brand-teal">
+                                AI that ships, not slides.
+                            </span>
+                        </span>
+                    </span>
                 </h1>
 
                 <p class="animate-fade-in-up delay-200 text-lg md:text-xl font-serif font-light text-brand-graphite/70 dark:text-brand-white/70 max-w-xl mx-auto leading-relaxed mb-14">
-                   Turn AI pressure into shipped products and a strategy you can defend. Embedded advisory for companies navigating technical complexity.
+                   Turn AI pressure into shipped products and a strategy you can defend. Embedded advisory and development for companies navigating AI, LLMs, and agentic systems.
                 </p>
 
                 <div class="animate-fade-in-up delay-300 flex flex-col items-center gap-4">
@@ -175,7 +206,7 @@
                         <span class="font-sans text-sm uppercase tracking-widest font-semibold">Start a Conversation</span>
                         <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
-                    <a href="https://linkedin.com" target="_blank" class="group inline-flex items-center gap-2 py-2 text-brand-graphite/50 dark:text-brand-white/50 hover:text-brand-graphite dark:hover:text-brand-white transition-colors">
+                    <a href="https://www.linkedin.com/in/eoindmccarthy/" target="_blank" class="group inline-flex items-center gap-2 py-2 text-brand-graphite/50 dark:text-brand-white/50 hover:text-brand-graphite dark:hover:text-brand-white transition-colors">
                         <span class="font-sans text-xs uppercase tracking-widest">or connect on LinkedIn</span>
                         <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
@@ -222,7 +253,7 @@
                             <div class="w-12 h-0.5 bg-brand-yale/30 dark:bg-brand-teal/30 mb-6 origin-left transition-all duration-500 group-hover:w-full group-hover:bg-brand-yale dark:group-hover:bg-brand-teal"></div>
                             <h3 class="text-2xl md:text-3xl font-sans font-bold mb-4 text-brand-graphite dark:text-brand-white">Embedded <br/><span class="font-serif italic font-light text-brand-yale dark:text-brand-teal">AI Leadership.</span></h3>
                             <p class="font-serif text-brand-graphite/70 dark:text-brand-white/70 leading-relaxed">
-                                Fractional CTO and AI advisory for companies that need senior technical thinking without the overhead. Clear recommendations, hands-on execution, and a strategy you can actually implement.
+                              Fractional CTO and AI advisory for companies that need senior technical thinking without the overhead. LLM strategy, agentic workflows, build vs. buy decisions, clear recommendations, hands-on execution, and a strategy you can actually implement.
                             </p>
                         </div>
                     </div>
@@ -253,12 +284,12 @@
                 
                 <div class="lg:w-2/3">
                     <p class="text-2xl md:text-4xl font-serif font-light leading-tight mb-12 text-brand-graphite dark:text-brand-white">
-                        15 years across music tech <span class="text-brand-graphite/40 dark:text-brand-white/40">(We Are Hunted, Hydric)</span>, entertainment, and product strategy. 3 years leading AI product development at Replica Studios. One exit.
+                        15 years across tech <span class="text-brand-graphite/40 dark:text-brand-white/40">(We Are Hunted, Hydric)</span>, entertainment, and product strategy. 3 years leading AI product development at Replica Studios.
                     </p>
                     
                     <div class="max-w-xl">
                         <p class="text-lg font-serif text-brand-graphite/70 dark:text-brand-white/70 leading-relaxed">
-                            Experience being the person in the room figuring out what to build and how to ship it — now applied to helping others do the same. Less noise, more clarity, something real at the end.
+                            Experienced in being the person in the room figuring out what to build and how to ship it. Now applied to helping others do the same. Less noise, more clarity, something real at the end.
                         </p>
                     </div>
                 </div>
@@ -275,7 +306,7 @@
                          <h3 class="text-xl md:text-2xl font-serif font-light mb-6 text-brand-graphite dark:text-brand-white">
                             Ongoing research into how AI is reshaping job requirements and workforce composition across Australian industries. Findings and analysis published on LinkedIn.
                         </h3>
-                        <a href="https://linkedin.com" target="_blank" class="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-widest text-brand-yale dark:text-brand-teal hover:text-brand-graphite dark:hover:text-brand-white transition-colors">
+                        <a href="https://www.linkedin.com/in/eoindmccarthy/" target="_blank" class="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-widest text-brand-yale dark:text-brand-teal hover:text-brand-graphite dark:hover:text-brand-white transition-colors">
                             View Research <span class="text-lg leading-none">&rarr;</span>
                         </a>
                     </div>
@@ -302,7 +333,7 @@
                     <a href="mailto:hello@sidechaininteractive.com" class="group px-10 py-5 bg-brand-white text-brand-graphite rounded-sm hover:bg-brand-teal hover:text-white transition-all duration-300 shadow-lg shadow-white/10 hover:shadow-xl hover:shadow-brand-teal/30 hover:-translate-y-0.5">
                         <span class="font-sans text-sm uppercase tracking-widest font-bold">hello@sidechaininteractive.com</span>
                     </a>
-                    <a href="https://linkedin.com" target="_blank" class="group inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors">
+                    <a href="https://www.linkedin.com/in/eoindmccarthy/" target="_blank" class="group inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors">
                         <span class="font-sans text-xs uppercase tracking-widest">or connect on LinkedIn</span>
                         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
@@ -316,6 +347,7 @@
         </footer>
 
     </main>
+
 
     <!-- Theme Logic -->
     <script>
@@ -348,6 +380,19 @@
           sunIcon.classList.remove('hidden');
           moonIcon.classList.add('hidden');
         }
+      });
+
+      // Tooltip effect
+      const tooltipTriggers = document.querySelectorAll('.tooltip-trigger');
+
+      tooltipTriggers.forEach(trigger => {
+        trigger.addEventListener('mouseenter', () => {
+          trigger.querySelector('.tooltip')?.classList.add('is-visible');
+        });
+
+        trigger.addEventListener('mouseleave', () => {
+          trigger.querySelector('.tooltip')?.classList.remove('is-visible');
+        });
       });
     </script>
 </body>
