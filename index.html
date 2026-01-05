@@ -8,7 +8,8 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,6 +24,7 @@
               display: ['"Bebas Neue"', 'cursive'],
               sans: ['Inter', 'sans-serif'],
               serif: ['"IBM Plex Serif"', 'serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
             },
             colors: {
               brand: {
@@ -108,6 +110,73 @@
         from { opacity: 0; transform: translateX(100%) translateY(4px) scale(0.96); }
         to { opacity: 1; transform: translateX(100%) translateY(0) scale(1); }
       }
+
+      /* PRODUCT progress chip */
+      .progress-container {
+        position: absolute;
+        bottom: -24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(4px);
+        opacity: 0;
+        transition: all 0.3s ease-out;
+      }
+
+      .product-wrapper:hover .progress-container {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        transition: all 0.2s ease-out;
+      }
+
+      .chip.shipped {
+        background: #ecfdf5;
+        color: #059669;
+      }
+
+      .dark .chip.shipped {
+        background: rgba(5, 150, 105, 0.2);
+        color: #34d399;
+      }
+
+      .spinner {
+        width: 8px;
+        height: 8px;
+        border: 1.5px solid #cbd5e1;
+        border-top-color: #64748b;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      .dark .spinner {
+        border-color: #475569;
+        border-top-color: #94a3b8;
+      }
+
+      .chip.shipped .spinner {
+        display: none;
+      }
+
+      .check {
+        display: none;
+      }
+
+      .chip.shipped .check {
+        display: inline;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
     </style>
 <script type="importmap">
 {
@@ -175,25 +244,25 @@
                     <span class="text-[11px] font-sans font-medium uppercase tracking-widest opacity-80">Limited Availability</span>
                 </div>
 
-                <h1 id="hero-headline" class="animate-fade-in-up delay-100 mb-10 text-brand-graphite dark:text-brand-white flex flex-col items-center">
-                    <span class="tooltip-trigger relative" data-tooltip="Building software that feels like craft.">
-                        <span class="font-serif italic font-light text-5xl md:text-7xl lg:text-8xl">Creative Technology</span>
-                        <span class="tooltip absolute right-0 -top-2 translate-x-full ml-3 hidden pointer-events-none">
-                            <span class="block px-4 py-3 bg-brand-graphite dark:bg-brand-white text-brand-white dark:text-brand-graphite text-xs font-sans font-medium not-italic tracking-wide whitespace-nowrap rounded-sm shadow-xl border-l-2 border-brand-yale dark:border-brand-teal">
-                                Building software that feels like craft.
-                            </span>
-                        </span>
-                    </span>
-                    <span class="my-2 md:my-3">
-                        <span class="font-sans font-light text-2xl md:text-3xl text-brand-yale dark:text-brand-teal">×</span>
-                    </span>
-                    <span class="tooltip-trigger relative" data-tooltip="AI that ships, not slides.">
-                        <span class="font-sans font-semibold text-5xl md:text-7xl lg:text-8xl">Applied AI</span>
-                        <span class="tooltip absolute right-0 -top-2 translate-x-full ml-3 hidden pointer-events-none">
-                            <span class="block px-4 py-3 bg-brand-graphite dark:bg-brand-white text-brand-white dark:text-brand-graphite text-xs font-sans font-medium tracking-wide whitespace-nowrap rounded-sm shadow-xl border-l-2 border-brand-yale dark:border-brand-teal">
-                                AI that ships, not slides.
-                            </span>
-                        </span>
+                <h1 id="hero-headline" class="animate-fade-in-up delay-100 mb-10 text-brand-graphite dark:text-brand-white flex items-center justify-center gap-4 md:gap-6">
+                    <!-- PRODUCT with progress animation -->
+                    <div id="product-wrapper" class="product-wrapper relative inline-block cursor-default">
+                        <span class="font-display text-5xl md:text-7xl lg:text-8xl tracking-[0.05em]">PRODUCT</span>
+                        <div class="progress-container">
+                            <div class="chip bg-brand-alabaster/50 dark:bg-brand-white/10 text-brand-graphite/60 dark:text-brand-white/60">
+                                <div class="spinner"></div>
+                                <span class="check">✓</span>
+                                <span class="status-text">thinking...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- × separator -->
+                    <span class="font-sans font-light text-2xl md:text-3xl text-brand-yale dark:text-brand-teal">×</span>
+
+                    <!-- AI with robot video -->
+                    <span id="ai-trigger" class="inline-flex items-center cursor-pointer font-display text-5xl md:text-7xl lg:text-8xl tracking-[0.05em]">
+                        <span>A</span><span id="ai-letter-i" class="relative">I<video id="robot-video" src="friendly_robot916.webm" muted playsinline class="absolute -top-[15px] left-[calc(100%-8px)] h-[1.3em] w-auto scale-[1.5] origin-left opacity-0 pointer-events-none transition-opacity duration-200 dark:invert" style="clip-path: inset(0 100% 0 0);"></video></span>
                     </span>
                 </h1>
 
@@ -382,17 +451,75 @@
         }
       });
 
-      // Tooltip effect
-      const tooltipTriggers = document.querySelectorAll('.tooltip-trigger');
+      // PRODUCT progress animation
+      const stages = ['thinking...', 'building...', 'shipped ✓'];
+      const stageTiming = [900, 1100, null];
 
-      tooltipTriggers.forEach(trigger => {
-        trigger.addEventListener('mouseenter', () => {
-          trigger.querySelector('.tooltip')?.classList.add('is-visible');
-        });
+      const productWrapper = document.getElementById('product-wrapper');
+      const statusText = productWrapper.querySelector('.status-text');
+      const spinner = productWrapper.querySelector('.spinner');
+      const chip = productWrapper.querySelector('.chip');
 
-        trigger.addEventListener('mouseleave', () => {
-          trigger.querySelector('.tooltip')?.classList.remove('is-visible');
-        });
+      let currentStage = 0;
+      let productTimeout = null;
+
+      function setStage(stage) {
+        currentStage = stage;
+        statusText.textContent = stages[stage];
+
+        if (stage === stages.length - 1) {
+          spinner.style.display = 'none';
+          chip.classList.add('shipped');
+        } else {
+          spinner.style.display = 'block';
+          chip.classList.remove('shipped');
+        }
+      }
+
+      function advance() {
+        if (currentStage < stages.length - 1) {
+          setStage(currentStage + 1);
+          if (stageTiming[currentStage]) {
+            productTimeout = setTimeout(advance, stageTiming[currentStage]);
+          }
+        }
+      }
+
+      function resetProduct() {
+        clearTimeout(productTimeout);
+        setStage(0);
+      }
+
+      productWrapper.addEventListener('mouseenter', () => {
+        resetProduct();
+        productTimeout = setTimeout(() => {
+          setStage(0);
+          productTimeout = setTimeout(advance, stageTiming[0]);
+        }, 200);
+      });
+
+      productWrapper.addEventListener('mouseleave', () => {
+        resetProduct();
+      });
+
+      // Robot video peeking from behind the "I" in AI
+      const aiTrigger = document.getElementById('ai-trigger');
+      const robotVideo = document.getElementById('robot-video');
+
+      aiTrigger.addEventListener('mouseenter', () => {
+        robotVideo.currentTime = 0;
+        robotVideo.play();
+        robotVideo.style.opacity = '1';
+        robotVideo.style.clipPath = 'inset(0 0 0 0)';
+        robotVideo.style.transition = 'clip-path 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s';
+      });
+
+      aiTrigger.addEventListener('mouseleave', () => {
+        robotVideo.style.clipPath = 'inset(0 100% 0 0)';
+        robotVideo.style.opacity = '0';
+        setTimeout(() => {
+          robotVideo.pause();
+        }, 400);
       });
     </script>
 </body>
