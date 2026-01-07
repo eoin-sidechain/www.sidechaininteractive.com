@@ -245,9 +245,9 @@
                 </div>
 
                 <h1 id="hero-headline" class="animate-fade-in-up delay-100 mb-10 text-brand-graphite dark:text-brand-white flex items-center justify-center gap-4 md:gap-6">
-                    <!-- PRODUCT with progress animation -->
-                    <div id="product-wrapper" class="product-wrapper relative inline-block cursor-default">
-                        <span class="font-display text-5xl md:text-7xl lg:text-8xl tracking-[0.05em]">PRODUCT</span>
+                    <!-- BUILD with progress animation -->
+                    <div id="build-wrapper" class="product-wrapper relative inline-block cursor-default">
+                        <span class="font-display text-5xl md:text-7xl lg:text-8xl tracking-[0.05em]">BUILD</span>
                         <div class="progress-container">
                             <div class="chip bg-brand-alabaster/50 dark:bg-brand-white/10 text-brand-graphite/60 dark:text-brand-white/60">
                                 <div class="spinner"></div>
@@ -257,8 +257,8 @@
                         </div>
                     </div>
 
-                    <!-- × separator -->
-                    <span class="font-sans font-light text-2xl md:text-3xl text-brand-yale dark:text-brand-teal">×</span>
+                    <!-- with -->
+                    <span class="font-sans font-light text-2xl md:text-3xl text-brand-yale dark:text-brand-teal">with</span>
 
                     <!-- AI with robot video -->
                     <span id="ai-trigger" class="inline-flex items-center cursor-pointer font-display text-5xl md:text-7xl lg:text-8xl tracking-[0.05em]">
@@ -440,11 +440,11 @@
         }
       });
 
-      // PRODUCT progress animation
+      // BUILD progress animation
       const stages = ['thinking...', 'building...', 'shipped ✓'];
       const stageTiming = [900, 1100, null];
 
-      const productWrapper = document.getElementById('product-wrapper');
+      const productWrapper = document.getElementById('build-wrapper');
       const statusText = productWrapper.querySelector('.status-text');
       const spinner = productWrapper.querySelector('.spinner');
       const chip = productWrapper.querySelector('.chip');
@@ -510,6 +510,7 @@
           robotVideo.pause();
         }, 400);
       });
+
     </script>
 </body>
 </html>
