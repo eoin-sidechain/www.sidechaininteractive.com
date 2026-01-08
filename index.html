@@ -164,11 +164,17 @@
       /* PRODUCT progress chip */
       .progress-container {
         position: absolute;
-        bottom: -12px;
+        bottom: -16px;
         left: 50%;
         transform: translateX(-50%) translateY(4px);
         opacity: 0;
         transition: all 0.3s ease-out;
+      }
+
+      @media (min-width: 768px) {
+        .progress-container {
+          bottom: -12px;
+        }
       }
 
       .product-wrapper:hover .progress-container {
@@ -184,6 +190,7 @@
         border-radius: 10px;
         font-family: 'JetBrains Mono', monospace;
         font-size: 10px;
+        white-space: nowrap;
         transition: all 0.2s ease-out;
       }
 
