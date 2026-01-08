@@ -636,8 +636,8 @@
           robotVideo.addEventListener('ended', () => {
             hideRobot();
           }, { once: true });
-          // Fallback hide after 4 seconds if video doesn't trigger ended event
-          setTimeout(hideRobot, 4000);
+          // Fallback hide after 20 seconds if video doesn't trigger ended event
+          setTimeout(hideRobot, 20000);
         }
       }, 5000);
 
