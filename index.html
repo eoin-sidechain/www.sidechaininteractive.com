@@ -101,7 +101,10 @@
     </script>
 
     <style>
-      html { scroll-behavior: smooth; }
+      html, body {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
       
       /* Film Grain Texture */
       .noise-bg {
@@ -214,6 +217,17 @@
         to { transform: rotate(360deg); }
       }
 
+      /* Mobile scroll-triggered service hover effect */
+      @media (max-width: 768px) {
+        .service-triggered .service-line {
+          width: 100% !important;
+          background-color: #284b63 !important;
+        }
+        .service-triggered .service-number {
+          color: rgba(40, 75, 99, 0.2) !important;
+        }
+      }
+
     </style>
 <script type="importmap">
 {
@@ -249,10 +263,10 @@
     <main class="w-full">
         
         <!-- HERO SECTION -->
-        <section class="min-h-screen flex flex-col justify-center items-center px-6 md:px-12 relative pt-20 pb-20">
+        <section class="min-h-screen flex flex-col justify-center items-center px-6 md:px-12 relative pt-20 pb-20 overflow-hidden">
             <!-- Ambient Background Elements -->
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-alabaster/40 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-brand-yale/5 rounded-full blur-[100px] -z-10 animate-pulse-slow" style="animation-delay: 2s"></div>
+            <div class="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-brand-alabaster/40 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-72 md:w-[500px] h-72 md:h-[500px] bg-brand-yale/5 rounded-full blur-[100px] -z-10 animate-pulse-slow" style="animation-delay: 2s"></div>
 
             <div class="max-w-5xl mx-auto text-center z-10">
                  <!-- Status Pill -->
@@ -328,10 +342,10 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
                     <!-- Service 1: Embedded AI Leadership -->
-                    <div class="group relative">
-                        <span class="absolute -left-4 md:left-0 -top-2 font-display text-6xl text-brand-alabaster select-none transition-colors duration-500 group-hover:text-brand-yale/20">01</span>
+                    <div class="service-card group relative">
+                        <span class="service-number absolute -left-4 md:left-0 -top-2 font-display text-6xl text-brand-alabaster select-none transition-colors duration-500 group-hover:text-brand-yale/20">01</span>
                         <div class="relative">
-                            <div class="w-12 h-0.5 bg-brand-yale/30 mb-6 origin-left transition-all duration-500 group-hover:w-full group-hover:bg-brand-yale"></div>
+                            <div class="service-line w-12 h-0.5 bg-brand-yale/30 mb-6 origin-left transition-all duration-500 group-hover:w-full group-hover:bg-brand-yale"></div>
                             <h3 class="text-2xl md:text-3xl font-serif font-medium mb-4 text-brand-graphite">Embedded <br/><span class="italic font-light text-brand-yale">AI Leadership.</span></h3>
                             <p class="font-serif text-brand-graphite/70 leading-relaxed mb-4">
                               Fractional CTO and AI advisory for companies that need senior technical thinking without the overhead. LLM strategy, AI roadmap, build vs. buy decisions - and hands-on execution to back it up.
@@ -341,10 +355,10 @@
                     </div>
 
                     <!-- Service 2: Ship Products -->
-                    <div class="group relative">
-                        <span class="absolute -left-4 md:left-0 -top-2 font-display text-6xl text-brand-alabaster select-none transition-colors duration-500 group-hover:text-brand-yale/20">02</span>
+                    <div class="service-card group relative">
+                        <span class="service-number absolute -left-4 md:left-0 -top-2 font-display text-6xl text-brand-alabaster select-none transition-colors duration-500 group-hover:text-brand-yale/20">02</span>
                         <div class="relative">
-                            <div class="w-12 h-0.5 bg-brand-yale/30 mb-6 origin-left transition-all duration-500 group-hover:w-full group-hover:bg-brand-yale"></div>
+                            <div class="service-line w-12 h-0.5 bg-brand-yale/30 mb-6 origin-left transition-all duration-500 group-hover:w-full group-hover:bg-brand-yale"></div>
                             <h3 class="text-2xl md:text-3xl font-serif font-medium mb-4 text-brand-graphite">Ship products, <br/><span class="italic font-light text-brand-yale">not decks.</span></h3>
                             <p class="font-serif text-brand-graphite/70 leading-relaxed mb-4">
                                 Development for companies integrating AI into their products. Senior technical help without the hiring overhead - from prototype to production, building alongside your team until something real ships.
@@ -354,10 +368,10 @@
                     </div>
 
                     <!-- Service 3: Multiply Your Team -->
-                    <div class="group relative">
-                        <span class="absolute -left-4 md:left-0 -top-2 font-display text-6xl text-brand-alabaster select-none transition-colors duration-500 group-hover:text-brand-yale/20">03</span>
+                    <div class="service-card group relative">
+                        <span class="service-number absolute -left-4 md:left-0 -top-2 font-display text-6xl text-brand-alabaster select-none transition-colors duration-500 group-hover:text-brand-yale/20">03</span>
                         <div class="relative">
-                            <div class="w-12 h-0.5 bg-brand-yale/30 mb-6 origin-left transition-all duration-500 group-hover:w-full group-hover:bg-brand-yale"></div>
+                            <div class="service-line w-12 h-0.5 bg-brand-yale/30 mb-6 origin-left transition-all duration-500 group-hover:w-full group-hover:bg-brand-yale"></div>
                             <h3 class="text-2xl md:text-3xl font-serif font-medium mb-4 text-brand-graphite">Multiply your team <br/><span class="italic font-light text-brand-yale">with AI.</span></h3>
                             <p class="font-serif text-brand-graphite/70 leading-relaxed mb-4">
                                 AI agents and workflow automation that give your team leverage. Research, outreach, customer ops, internal knowledge - automate the multi-step work that eats your time.
@@ -588,22 +602,66 @@
       // Robot video peeking from behind the "I" in AI
       const aiTrigger = document.getElementById('ai-trigger');
       const robotVideo = document.getElementById('robot-video');
+      let robotAutoPlayed = false;
 
-      aiTrigger.addEventListener('mouseenter', () => {
+      function showRobot() {
         robotVideo.currentTime = 0;
         robotVideo.play();
         robotVideo.style.opacity = '1';
         robotVideo.style.clipPath = 'inset(0 0 0 0)';
         robotVideo.style.transition = 'clip-path 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s';
-      });
+      }
 
-      aiTrigger.addEventListener('mouseleave', () => {
+      function hideRobot() {
         robotVideo.style.clipPath = 'inset(0 100% 0 0)';
         robotVideo.style.opacity = '0';
         setTimeout(() => {
           robotVideo.pause();
         }, 400);
+      }
+
+      // Autoplay robot video after 5 seconds (once)
+      setTimeout(() => {
+        if (!robotAutoPlayed) {
+          robotAutoPlayed = true;
+          showRobot();
+          // Hide after video duration (~3s) + small buffer
+          robotVideo.addEventListener('ended', () => {
+            hideRobot();
+          }, { once: true });
+          // Fallback hide after 4 seconds if video doesn't trigger ended event
+          setTimeout(hideRobot, 4000);
+        }
+      }, 5000);
+
+      aiTrigger.addEventListener('mouseenter', () => {
+        showRobot();
       });
+
+      aiTrigger.addEventListener('mouseleave', () => {
+        hideRobot();
+      });
+
+      // Mobile scroll-triggered service hover effect
+      if (window.innerWidth <= 768) {
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        const serviceObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('service-triggered');
+            } else {
+              entry.target.classList.remove('service-triggered');
+            }
+          });
+        }, {
+          // Trigger when card enters top 30% of viewport
+          rootMargin: '-10% 0px -70% 0px',
+          threshold: 0
+        });
+
+        serviceCards.forEach(card => serviceObserver.observe(card));
+      }
 
       // Contact form submission
       const contactForm = document.getElementById('contact-form');
