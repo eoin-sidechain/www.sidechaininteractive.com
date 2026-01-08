@@ -59,7 +59,6 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -79,7 +78,7 @@
         theme: {
           extend: {
             fontFamily: {
-              display: ['"Bebas Neue"', 'cursive'],
+              display: ['"Bebas Neue"', 'sans-serif'],
               sans: ['Inter', 'sans-serif'],
               serif: ['"IBM Plex Serif"', 'serif'],
               mono: ['"JetBrains Mono"', 'monospace'],
@@ -236,12 +235,7 @@
         <div class="max-w-screen-2xl mx-auto flex justify-between items-center pointer-events-auto">
             <!-- Logo -->
             <div class="flex items-center gap-3 group cursor-pointer select-none">
-                <div class="w-10 h-10 relative text-brand-graphite">
-                    <svg width="40" height="40" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                        <path d="M0.700043 0.812485C1.79454 1.08391 2.70538 1.64839 3.64633 2.73729C4.77222 4.0402 5.93128 6.08097 7.45297 9.2578C8.90351 12.2861 10.3994 13.7753 12.3914 14.9453C12.8785 15.2313 13.3495 15.4821 13.7821 15.6973H0.700043V0.812485Z" fill="currentColor" stroke="currentColor"/>
-                        <path d="M0.200043 13.31C2.82827 13.9203 5.00421 8.6974 6.46091 5.42267C8.95488 -0.183874 11.0986 0.203097 16.2 0.203096V13.31" class="stroke-brand-yale" stroke-width="0.4" stroke-linecap="round" stroke-dasharray="1.5 1.5"/>
-                    </svg>
-                </div>
+                <img src="logo.svg" alt="Sidechain Interactive" class="w-10 h-10">
                 <div class="flex flex-col leading-none justify-center h-full pt-1">
                     <span class="font-display text-3xl tracking-wide text-brand-graphite uppercase leading-[0.85]">Sidechain</span>
                     <span class="font-display text-sm tracking-[0.2em] text-brand-yale uppercase leading-none ml-[2px]">Interactive</span>
